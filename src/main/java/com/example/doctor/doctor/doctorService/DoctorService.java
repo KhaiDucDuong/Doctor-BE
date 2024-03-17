@@ -23,7 +23,7 @@ public class DoctorService {
 
     }
 
-    public List<Doctor> findAllDocter(){
+    public List<Doctor> findAllDoctor(){
         return repository.findAll();
     }
 

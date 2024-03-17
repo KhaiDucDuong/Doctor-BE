@@ -34,7 +34,7 @@ public class PatientController {
     @ResponseStatus(HttpStatus.CREATED)
     public Patient makeAppointment1(@RequestBody Patient productType){
         try {
-            List<Doctor> listDoctor = doctorService.findAllDocter();
+            List<Doctor> listDoctor = doctorService.findAllDoctor();
 
             return departmentServiceTypeService.addPateint(productType);
         } catch (Exception e) {
