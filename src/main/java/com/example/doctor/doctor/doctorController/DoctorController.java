@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/doctors")
 public class DoctorController {
@@ -24,6 +26,15 @@ public class DoctorController {
         try {
             doctor.setAvailableFlag(true);
             return doctorService.addDoctor(doctor);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @GetMapping("/allDoctors")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<Doctor> getDoctors(){
+        try {
+            return doctorService.findAllDoctor();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
