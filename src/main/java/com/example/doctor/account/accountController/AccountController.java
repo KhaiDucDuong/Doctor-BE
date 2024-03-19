@@ -22,6 +22,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/authentications")
+@CrossOrigin(origins = "*")
 public class AccountController {
     @Autowired
     public AccountApplication accountApplication;

@@ -25,7 +25,7 @@ public class AccountApplication {
         else if (StringUtils.isEmpty(account.getPassword())) {
             throw new Exception("Password can not be empty");
         }
-        else if (accountService.findUsername(account.getLoginName())==null)
+        else if (accountService.findUsername(account.getLoginName())!=null)
         {
             throw new Exception("Account name has been created");
         }

@@ -14,4 +14,7 @@ public interface IdoctorRepository extends MongoRepository<Doctor,String>, Custo
     List<Doctor> findByFullnameIgnoreCase(String fullname);
     @Query("{ 'fullname' : { '$regex' : ?0 , $options: 'i'}}")
     List<Doctor> SearchDoctorsReg(String fullname);
+
+    @Query("select distinct d.specialize from Doctor d")
+    List<String> findAllSpecialize();
 }
