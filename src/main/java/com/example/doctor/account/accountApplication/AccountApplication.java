@@ -18,10 +18,20 @@ public class AccountApplication {
         else if (StringUtils.isEmpty(account.getPassword())) {
             throw new Exception("Password can not be empty");
         }
-        else if (accountService.getAccountByAccountName(account.getLoginName())!=null)
+        else if (accountService.getAccountByAccountName(account.getLoginName())==null)
         {
             throw new Exception("Account name has been created");
         }
         return accountService.addAccount(account);
+    }
+    public boolean authentication(String userName, String password){
+        if(accountService.getAccountByAccountName(userName)!=null)
+        {
+            if(accountService.getAccountByAccountName(password)!=null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

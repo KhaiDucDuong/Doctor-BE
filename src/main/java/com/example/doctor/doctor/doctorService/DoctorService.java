@@ -22,6 +22,11 @@ public class DoctorService {
     public List<Doctor> findAllDocter(){
         return repository.findAll();
     }
+
+    public List<Doctor> findAllDoctor(){
+        return repository.findAll();
+    }
+
     public Doctor getDoctorByDoctorId(String doctorId){
         return repository.findById(doctorId).get();
     }
