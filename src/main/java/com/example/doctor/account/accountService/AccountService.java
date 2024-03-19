@@ -4,6 +4,7 @@ import com.example.doctor.account.Account;
 import com.example.doctor.account.accountRepository.IAccountRepository;
 import com.example.doctor.department.Department;
 import com.example.doctor.department.deparmentRepository.IdeparmentRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,5 +22,8 @@ public class AccountService {
     }
     public List<Account> getAccountByAccountName(String loginName){
         return repository.findByLoginName(loginName);
+    }
+    public List<Account> getAccountByUserID(ObjectId userId){
+        return repository.findByAndUserId(userId);
     }
 }

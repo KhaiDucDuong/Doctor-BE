@@ -21,13 +21,10 @@ import java.util.Set;
 @Builder
 public class Patient implements Serializable {
     private ObjectId _id;
-    private ObjectId accountId;
     private String fullname;
     private String phoneNumber;
     private String email;
     private Date dateOfbirth;
     private Boolean gender;
     private Boolean hasAppointment;
-    @DBRef
-    private Set<Roles> roles = new HashSet<>();
 }

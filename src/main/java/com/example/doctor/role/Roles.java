@@ -17,7 +17,4 @@ public class Roles implements Serializable {
     private ObjectId _id;
     private Role roleName;
     private Boolean isDeleted;
-    public Roles(Role name) {
-        this.roleName = name;
-    }
 }
