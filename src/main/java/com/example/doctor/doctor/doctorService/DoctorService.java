@@ -43,4 +43,7 @@ public class DoctorService {
         repository.deleteById(userId);
         return userId+" User is deleted";
     }
+    public List<Doctor> searchDoctors(String data){
+        return repository.SearchDoctorsReg(data);
+    }
 }
