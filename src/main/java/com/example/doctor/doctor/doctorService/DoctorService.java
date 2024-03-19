@@ -16,25 +16,18 @@ public class DoctorService {
     public DoctorService(IdoctorRepository repository) {
         this.repository = repository;
     }
-
-
     public Doctor addDoctor(Doctor doctor){
         return repository.save(doctor);
-
     }
-
     public List<Doctor> findAllDocter(){
         return repository.findAll();
     }
-
     public Doctor getDoctorByDoctorId(String doctorId){
         return repository.findById(doctorId).get();
-
     }
     public List<Doctor> getdoctorByDoctorName(String Fullname){
         return repository.findByFullname(Fullname);
     }
-
     public String deleteUser(String userId){
         repository.deleteById(userId);
         return userId+" User is deleted";
