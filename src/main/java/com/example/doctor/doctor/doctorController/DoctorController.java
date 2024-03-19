@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/doctors")
+@CrossOrigin(origins = "*")
 public class DoctorController {
     @Autowired
     private DoctorService doctorService;
@@ -28,4 +31,13 @@ public class DoctorController {
         }
     }
 
+    @GetMapping("/allDoctors")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<Doctor> getDoctors(){
+        try {
+            return doctorService.findAllDoctor();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
