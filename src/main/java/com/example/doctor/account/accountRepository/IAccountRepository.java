@@ -8,8 +8,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface IAccountRepository extends MongoRepository<Account,String> {
-    List<Account> findByLoginName(String loginName);
+    //List<Account> findByLoginName(String loginName);
     List<Account> findByAndUserId(ObjectId userId);
-    String findRoleByLoginName(String loginName);
+    Account findByLoginName(String loginName);
+
 
 }
