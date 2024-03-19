@@ -1,7 +1,5 @@
 package com.example.doctor.patient.patientService;
 
-import com.example.doctor.doctor.Doctor;
-import com.example.doctor.doctor.doctorRepository.IdoctorRepository;
 import com.example.doctor.patient.Patient;
 import com.example.doctor.patient.patientRepository.IpatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +24,14 @@ public class PatientService {
         return repository.findAll();
     }
 
-    public Patient getProductByProductTypeId(String producTypeId){
+    public Patient getPatientByPatientId(String producTypeId){
         return repository.findById(producTypeId).get();
 
     }
+    public List<Patient> getpatientByPatientName(String Fullname){
+        return repository.findByFullname(Fullname);
+    }
+
 
     public String deleteUser(String userId){
         repository.deleteById(userId);

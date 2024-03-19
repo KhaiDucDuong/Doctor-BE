@@ -1,15 +1,19 @@
 package com.example.doctor.patient;
 
+import com.example.doctor.role.Roles;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 @Document(collection = "patients")
 @Data
 @AllArgsConstructor
@@ -24,4 +28,6 @@ public class Patient implements Serializable {
     private Date dateOfbirth;
     private Boolean gender;
     private Boolean hasAppointment;
+    @DBRef
+    private Set<Roles> roles = new HashSet<>();
 }

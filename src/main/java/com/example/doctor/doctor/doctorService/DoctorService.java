@@ -23,13 +23,16 @@ public class DoctorService {
 
     }
 
-    public List<Doctor> findAllDoctor(){
+    public List<Doctor> findAllDocter(){
         return repository.findAll();
     }
 
-    public Doctor getProductByProductTypeId(String producTypeId){
-        return repository.findById(producTypeId).get();
+    public Doctor getDoctorByDoctorId(String doctorId){
+        return repository.findById(doctorId).get();
 
+    }
+    public List<Doctor> getdoctorByDoctorName(String Fullname){
+        return repository.findByFullname(Fullname);
     }
 
     public String deleteUser(String userId){

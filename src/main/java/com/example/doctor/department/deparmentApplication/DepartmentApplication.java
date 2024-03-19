@@ -15,7 +15,7 @@ public class DepartmentApplication {
         if (StringUtils.isEmpty(departmentName.getDepartmentName())) {
             throw new Exception("Department name can not be not empty");
         }
-        else if (departmentService.getdepartmentByDepartmentName(departmentName.getDepartmentName()).size() > 0)
+        else if (departmentService.getdepartmentByDepartmentName(departmentName.getDepartmentName())==null)
         {
             throw new Exception("Department name has been created");
         }

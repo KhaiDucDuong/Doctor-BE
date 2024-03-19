@@ -15,6 +15,9 @@ import java.io.Serializable;
 @Builder
 public class Roles implements Serializable {
     private ObjectId _id;
-    private String roleName;
+    private Role roleName;
     private Boolean isDeleted;
+    public Roles(Role name) {
+        this.roleName = name;
+    }
 }
