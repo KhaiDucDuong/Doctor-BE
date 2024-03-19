@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,13 +81,18 @@ public class AccountController {
                     userId = accountService.findUserId(userName);
                 }
             }
+            else
+            {
+                return new ResponseEntity<>(
+                    "Authentication failed",
+                    HttpStatus.BAD_REQUEST);
+            }
             session = request.getSession();
             session.setAttribute("userId", userId);
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return ResponseEntity.ok (userId);
+        return new ResponseEntity<>("Log in successfully",HttpStatus.OK);
     }
 
 }
