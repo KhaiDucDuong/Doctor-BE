@@ -1,5 +1,7 @@
 package com.example.doctor.role;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class Roles implements Serializable {
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId _id;
     private Role roleName;
     private Boolean isDeleted;

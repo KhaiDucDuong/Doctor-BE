@@ -6,6 +6,8 @@ import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
+
 @SpringBootApplication
 public class PatientApplication {
     @Autowired
@@ -21,6 +23,16 @@ public class PatientApplication {
         {
             throw new Exception("Patient has been created");
         }
-        return patientService.addPateint(fullname);
+        return patientService.addPatient(fullname);
+    }
+    public List<Patient> findAllPatient(){
+        return  patientService.findAllPatient();
+    }
+    public Patient getPatientById(String id) throws Exception{
+        Patient patient =  patientService.getPatientById(id);
+        if (patient == null) {
+            throw new Exception("Không có patient");
+        }
+        else return patient;
     }
 }

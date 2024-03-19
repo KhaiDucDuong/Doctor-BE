@@ -1,5 +1,7 @@
 package com.example.doctor.schedule;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +18,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @Builder
 public class Schedule implements Serializable {
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId _id;
     private ObjectId doctorId;
     private ObjectId deparmentId;

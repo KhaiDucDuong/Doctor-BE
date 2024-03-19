@@ -4,8 +4,10 @@ import com.example.doctor.doctor.Doctor;
 import com.example.doctor.doctor.doctorService.DoctorService;
 import com.example.doctor.patient.Patient;
 import com.example.doctor.patient.patientService.PatientService;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/patients")
+@CrossOrigin(origins = "*")
+
 public class PatientController {
     @Autowired
     private PatientService departmentServiceTypeService;
@@ -38,5 +42,21 @@ public class PatientController {
             }
         }
         return "User information not found";
+    }
+    @GetMapping("/allPatients")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<Patient> allPatients() {
+        try {
+            return  departmentServiceTypeService.findAllPatient();
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    }
+
+    }
+
+    @GetMapping("/patient_{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Patient  getPatient(@Valid @PathVariable("id") String id){
+        return departmentServiceTypeService.getPatientByPatientId(id);
     }
 }
