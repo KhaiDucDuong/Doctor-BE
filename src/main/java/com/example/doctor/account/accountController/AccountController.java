@@ -9,9 +9,11 @@ import com.example.doctor.command.commandRegister;
 import com.example.doctor.doctor.doctorApplication.DoctorsApplication;
 import com.example.doctor.patient.Patient;
 import com.example.doctor.patient.patientApplication.PatientApplication;
-import com.example.doctor.patient.patientService.PatientService;
 import com.example.doctor.role.roleRepository.IRoleRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,10 @@ public class AccountController {
     public PatientApplication patientApplication;
     @Autowired
     public IAccountRepository accountRepository;
+    @Autowired
+    public AccountService accountService;
+    @Autowired
+    private HttpServletRequest request;
     @Autowired
     public DoctorsApplication doctorApplication;
     @Autowired
@@ -59,22 +65,27 @@ public class AccountController {
 
     @PostMapping("/signIn")
     public ResponseEntity<?> SignInUser(@Valid @RequestBody commandRegister commandRegister) {
+        ObjectId userId = null;
+        HttpSession session;
         try {
             String userName = commandRegister.getLoginName();
             String passWord = commandRegister.getPassword();
-            if(accountApplication.authentication(userName, passWord)){
-                if(Objects.equals(accountRepository.findRoleByLoginName(userName), "patient")){
-                    return ResponseEntity.ok(new MessageRespone("Welcome to patient page!"));
-                } else if (Objects.equals(accountRepository.findRoleByLoginName(userName), "doctor")) {
-                    return ResponseEntity.ok(new MessageRespone("Welcome to doctor page!"));
-                } else if (Objects.equals(accountRepository.findRoleByLoginName(userName), "admin")) {
-                    return ResponseEntity.ok(new MessageRespone("Welcome to admin page!"));
+            if (accountApplication.authentication(userName, passWord)) {
+                if (Objects.equals(accountService.findRolesByLoginName(userName), "patient")) {
+                    userId = accountService.findUserId(userName);
+                } else if (Objects.equals(accountService.findRolesByLoginName(userName), "doctor")) {
+                    userId = accountService.findUserId(userName);
+                } else if (Objects.equals(accountService.findRolesByLoginName(userName), "admin")) {
+                    userId = accountService.findUserId(userName);
                 }
             }
-        }catch(Exception e){
+            session = request.getSession();
+            session.setAttribute("userId", userId);
+
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return ResponseEntity.ok(new MessageRespone("User registered successfully!"));
+        return ResponseEntity.ok (userId);
     }
 
 }
