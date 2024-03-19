@@ -2,6 +2,7 @@ package com.example.doctor.department.deparmentService;
 
 import com.example.doctor.department.Department;
 import com.example.doctor.department.deparmentRepository.IdeparmentRepository;
+import com.example.doctor.doctor.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,5 +36,7 @@ public class DepartmentService {
         repository.deleteById(userId);
         return userId+" User is deleted";
     }
-
+    public List<Department> searchDepartment(String data){
+        return repository.SearchDepartment(data);
+    }
 }

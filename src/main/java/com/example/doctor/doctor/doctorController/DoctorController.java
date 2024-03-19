@@ -3,6 +3,8 @@ package com.example.doctor.doctor.doctorController;
 import com.example.doctor.doctor.Doctor;
 import com.example.doctor.doctor.doctorApplication.DoctorsApplication;
 import com.example.doctor.doctor.doctorService.DoctorService;
+import com.example.doctor.patient.Patient;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -39,5 +41,11 @@ public class DoctorController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    @GetMapping("/search/{data}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<Doctor> SearchDoctorsReg(@Valid @PathVariable("data") String data){
+        data = data.replace("+", " ");
+        return doctorService.searchDoctors(data);
     }
 }
