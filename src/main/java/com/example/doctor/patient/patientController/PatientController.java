@@ -17,8 +17,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/patients")
-@CrossOrigin(origins = "*")
-
+@CrossOrigin(
+        origins = {"http://localhost:3000", "http://127.0.0.1:3000"},
+        allowCredentials = "true"
+)
 public class PatientController {
     @Autowired
     private PatientService departmentServiceTypeService;
@@ -28,7 +30,7 @@ public class PatientController {
         this.departmentServiceTypeService = productTypeApplication;
     }
     @GetMapping("/info")
-    public String getUserInfo() {
+    public Patient getUserInfo() {
         // Lấy userId từ session
         HttpSession session = request.getSession(false);
         if (session != null) {
@@ -37,11 +39,11 @@ public class PatientController {
                 // Sử dụng userId để lấy thông tin người dùng từ cơ sở dữ liệu
                 Patient userInfo = departmentServiceTypeService.getPatientByPatientId(String.valueOf(userId));
                 if (userInfo != null) {
-                    return "User Information: " + userInfo.toString();
+                    return userInfo;
                 }
             }
         }
-        return "User information not found";
+        return null;
     }
     @GetMapping("/allPatients")
     @ResponseStatus(HttpStatus.ACCEPTED)

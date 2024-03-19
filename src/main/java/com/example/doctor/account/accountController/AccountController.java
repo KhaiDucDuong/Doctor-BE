@@ -23,7 +23,11 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/authentications")
-@CrossOrigin(origins = "*")
+@CrossOrigin(
+        origins = {"http://localhost:3000", "http://127.0.0.1:3000/"},
+        allowCredentials = "true",
+        allowedHeaders = "*"
+)
 public class AccountController {
     @Autowired
     public AccountApplication accountApplication;
@@ -92,7 +96,7 @@ public class AccountController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return new ResponseEntity<>("Log in successfully",HttpStatus.OK);
+        return ResponseEntity.ok (userId);
     }
 
 }
