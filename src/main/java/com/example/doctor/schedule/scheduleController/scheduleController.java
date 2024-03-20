@@ -6,6 +6,7 @@ import com.example.doctor.doctor.doctorService.DoctorService;
 import com.example.doctor.patient.Patient;
 import com.example.doctor.schedule.Schedule;
 import com.example.doctor.schedule.scheduleApplication.scheduleApplication;
+import com.example.doctor.schedule.scheduleService.scheduleService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/schedule")
+@RequestMapping("/schedules")
 @CrossOrigin(origins = "*")
 
 public class scheduleController {
@@ -28,6 +29,8 @@ public class scheduleController {
     private HttpServletRequest request;
     @Autowired
     private DoctorService doctorService;
+    @Autowired
+    private scheduleService scheduleService;
     public scheduleController(scheduleApplication scheduleApplication) {
         this.scheduleApplication = scheduleApplication;
     }
@@ -46,5 +49,10 @@ public class scheduleController {
             }
         }
         return schedule;
+    }
+    @GetMapping("/schedule/{data}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<Schedule> getDoctorScheduleByWeek(@Valid @PathVariable("data") String data){
+        return  scheduleService.getScheduleByDoctorId(data);
     }
 }
