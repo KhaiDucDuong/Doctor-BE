@@ -23,7 +23,7 @@ public class DoctorController {
     }
     @PostMapping("/createDoctor")
     @ResponseStatus(HttpStatus.CREATED)
-    public Doctor createProductType(@RequestBody Doctor doctor){
+    public Doctor createDoctor(@RequestBody Doctor doctor){
         try {
             doctor.setAvailableFlag(true);
             doctor.setIsDeleted(false);

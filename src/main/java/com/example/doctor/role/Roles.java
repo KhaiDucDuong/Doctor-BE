@@ -18,6 +18,6 @@ import java.io.Serializable;
 public class Roles implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId _id;
-    private Role roleName;
+    private String roleName;
     private Boolean isDeleted;
 }

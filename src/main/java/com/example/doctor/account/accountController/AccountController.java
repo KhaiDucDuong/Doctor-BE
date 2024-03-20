@@ -9,7 +9,6 @@ import com.example.doctor.command.commandRegister;
 import com.example.doctor.doctor.doctorApplication.DoctorsApplication;
 import com.example.doctor.patient.Patient;
 import com.example.doctor.patient.patientApplication.PatientApplication;
-import com.example.doctor.role.roleRepository.IRoleRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -41,8 +40,6 @@ public class AccountController {
     private HttpServletRequest request;
     @Autowired
     public DoctorsApplication doctorApplication;
-    @Autowired
-    public IRoleRepository roleRepository;
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody commandRegister commandRegister) {
         try {

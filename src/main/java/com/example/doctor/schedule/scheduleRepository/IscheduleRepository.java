@@ -7,4 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface IscheduleRepository extends MongoRepository<Schedule,String> {
+    Schedule findSchedulesByDateOfweek(String dateOfweek);
 }
