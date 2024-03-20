@@ -2,6 +2,7 @@ package com.example.doctor.doctor.doctorRepository;
 
 
 import com.example.doctor.doctor.Doctor;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -15,4 +16,8 @@ public interface  IdoctorRepository extends MongoRepository<Doctor,String>, Cust
 
     @Query(value = "{'specialize' : {$exists: true}}", fields = "{ 'specialize' : 1}")
     List<String> findAllSpecialize();
+
+
+    List<Doctor> findDoctorByDepartmentId(ObjectId departmentId);
+
 }

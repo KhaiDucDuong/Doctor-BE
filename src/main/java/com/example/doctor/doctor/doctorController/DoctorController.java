@@ -4,6 +4,7 @@ import com.example.doctor.doctor.Doctor;
 import com.example.doctor.doctor.doctorApplication.DoctorsApplication;
 import com.example.doctor.doctor.doctorService.DoctorService;
 import jakarta.validation.Valid;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -69,5 +70,10 @@ public class DoctorController {
             return  doctorService.findAllDoctor();
         }
         return doctorService.searchDoctors(data);
+    }
+    @GetMapping("/department/{data}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<Doctor> findDoctorsByDepartmentId(@Valid @PathVariable("data") String data){
+            return  doctorService.findDoctorsByDepartmentId(data);
     }
 }

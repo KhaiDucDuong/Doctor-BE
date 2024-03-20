@@ -20,8 +20,10 @@ import java.util.Date;
 public class Doctor implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId _id;
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId accountId;
-    private ObjectId deparmentId;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private ObjectId departmentId;
     private String fullname;
     private Boolean gender;
     private Date dateOfbirth;

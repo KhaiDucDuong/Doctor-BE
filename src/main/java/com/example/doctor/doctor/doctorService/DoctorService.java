@@ -4,6 +4,7 @@ import com.example.doctor.department.Department;
 import com.example.doctor.department.deparmentRepository.IdeparmentRepository;
 import com.example.doctor.doctor.Doctor;
 import com.example.doctor.doctor.doctorRepository.IdoctorRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,5 +45,9 @@ public class DoctorService {
     }
     public List<Doctor> searchDoctors(String data){
         return repository.SearchDoctorsReg(data);
+    }
+    public List<Doctor> findDoctorsByDepartmentId(String id){
+        ObjectId departmentId = new ObjectId(id);
+        return repository.findDoctorByDepartmentId(departmentId);
     }
 }
