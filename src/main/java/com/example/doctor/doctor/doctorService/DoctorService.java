@@ -34,7 +34,7 @@ public class DoctorService {
         return repository.findById(doctorId).get();
     }
     public ObjectId getDepartmentByDoctorId(String doctorId){
-        return repository.findById(doctorId).get().getDeparmentId();
+        return repository.findById(doctorId).get().getDepartmentId();
     }
     public List<Doctor> getdoctorByDoctorName(String Fullname){
         return repository.findByFullname(Fullname);
