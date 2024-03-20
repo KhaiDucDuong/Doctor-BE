@@ -19,8 +19,13 @@ public class DoctorService {
     public Doctor addDoctor(Doctor doctor){
         return repository.save(doctor);
     }
-    public List<Doctor> findAllDocter(){
-        return repository.findAll();
+    public Doctor updateDoctor(Doctor doctor){
+        if(repository.existsById(String.valueOf(doctor.get_id()))){
+            return repository.save(doctor);
+        }
+        else{
+            throw new RuntimeException("Doctor with ID " + doctor.get_id() + " does not exist.");
+        }
     }
 
     public List<Doctor> findAllDoctor(){

@@ -5,8 +5,9 @@ import com.example.doctor.department.deparmentRepository.IdeparmentRepository;
 import com.example.doctor.doctor.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import java.util.function.Predicate;
 import java.util.List;
+import java.util.Arrays;
 @Component
 public class DepartmentService {
     @Autowired
@@ -20,8 +21,14 @@ public class DepartmentService {
         return repository.save(departmentName);
 
     }
-
-    public List<Department> findAllCategory(){
+    public Department updateDepartment(Department department) {
+        if (repository.existsById(String.valueOf(department.get_id()))) {
+            return repository.save(department);
+        } else {
+            throw new RuntimeException("Department with ID " + department.get_id() + " does not exist.");
+        }
+    }
+    public List<Department> findAllDepartment(){
         return repository.findAll();
     }
 
@@ -32,6 +39,7 @@ public class DepartmentService {
     public List<Department> getdepartmentByDepartmentName(String departmentName){
         return repository.findByDepartmentName(departmentName);
     }
+
     public String deleteUser(String userId){
         repository.deleteById(userId);
         return userId+" User is deleted";

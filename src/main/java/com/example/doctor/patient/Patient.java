@@ -30,4 +30,5 @@ public class Patient implements Serializable {
     private Date dateOfbirth;
     private Boolean gender;
     private Boolean hasAppointment;
+    private Boolean isDeleted;
 }

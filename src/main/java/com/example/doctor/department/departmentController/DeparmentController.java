@@ -17,7 +17,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class DeparmentController {
     @Autowired
-    private DepartmentService departmentServiceTypeService;
+    private DepartmentService departmentService;
     private final DepartmentApplication departmentApplication;
 
     public DeparmentController(DepartmentApplication productTypeApplication) {
@@ -27,14 +27,52 @@ public class DeparmentController {
     @SneakyThrows
     @PostMapping("/createDepartment")
     @ResponseStatus(HttpStatus.CREATED)
-    public Department createProductType(@RequestBody Department departmentName){
+    public Department createProductType(@RequestBody Department departmentName) {
+        try {
             departmentName.setAvailableFlag(true);
+            departmentName.setIsDeleted(false);
             return departmentApplication.createDepartment(departmentName);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    @PutMapping("/updateDepartment")
+    public Department updateDepartment(@RequestBody Department department) throws Exception {
+        try {
+            department.setAvailableFlag(true);
+            department.setIsDeleted(false);
+            return departmentApplication.updateDepartment(department);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PutMapping("/deleteDepartment")
+    public Department deleteDepartment(@RequestBody Department department) {
+        try {
+            department.setAvailableFlag(false);
+            department.setIsDeleted(true);
+            return departmentService.updateDepartment(department);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/allDepartments")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<Department> getDepartments() {
+        try {
+            return departmentService.findAllDepartment();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @GetMapping("/search/{data}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<Department> SearchDepartment(@Valid @PathVariable("data") String data){
+    public List<Department> SearchDepartment(@Valid @PathVariable("data") String data) {
         data = data.replace("+", " ");
-        return departmentServiceTypeService.searchDepartment(data);
+        return departmentService.searchDepartment(data);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.doctor.patient.patientService;
 
+import com.example.doctor.doctor.Doctor;
 import com.example.doctor.patient.Patient;
 import com.example.doctor.patient.patientRepository.IpatientRepository;
 
@@ -23,7 +24,14 @@ public class PatientService {
         return repository.save(patient);
 
     }
-
+    public Patient updatePatient(Patient patient){
+        if(repository.existsById(String.valueOf(patient.get_id()))){
+            return repository.save(patient);
+        }
+        else{
+            throw new RuntimeException("Patient with ID " + patient.get_id() + " does not exist.");
+        }
+    }
     public List<Patient> findAllCategory(){
         return repository.findAll();
     }
