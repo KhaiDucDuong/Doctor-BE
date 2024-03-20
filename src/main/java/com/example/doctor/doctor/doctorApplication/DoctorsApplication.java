@@ -13,6 +13,7 @@ import java.util.Arrays;
 public class DoctorsApplication {
     @Autowired
     private DoctorService doctorService;
+
     public Doctor createDoctor(Doctor doctor) throws Exception {
         //validate data
         List<Predicate<Doctor>> conditions = Arrays.asList(
@@ -27,16 +28,12 @@ public class DoctorsApplication {
                 throw new Exception("Invalid doctor data");
             }
         }
-        if (doctorService.getdoctorByDoctorName(doctor.getPhoneNumber()).size()>0)
-        {
+        if (doctorService.getdoctorByDoctorName(doctor.getPhoneNumber()).size() > 0) {
             throw new Exception("Phone number existed");
-        }
-        else if (doctorService.getdoctorByDoctorName(doctor.getAccountId().toString()).size()>0)
-        {
-            throw new Exception("Doctor Account has been created");
         }
         return doctorService.addDoctor(doctor);
     }
+
     public Doctor updateDoctor(Doctor doctor) throws Exception {
         //validate data
         List<Predicate<Doctor>> conditions = Arrays.asList(
@@ -51,11 +48,10 @@ public class DoctorsApplication {
                 throw new Exception("Invalid doctor data");
             }
         }
-        if (doctorService.getdoctorByDoctorName(doctor.getPhoneNumber()).size() >0) {
+        if (doctorService.getdoctorByDoctorName(doctor.getPhoneNumber()).size() > 0) {
             throw new Exception("Phone number existed");
-        } else if (doctorService.getdoctorByDoctorName(doctor.getAccountId().toString()).size()>0) {
-            throw new Exception("Doctor Account has been created");
         }
-        return doctorService.updateDoctor(doctor);
+            return doctorService.updateDoctor(doctor);
     }
 }
+
