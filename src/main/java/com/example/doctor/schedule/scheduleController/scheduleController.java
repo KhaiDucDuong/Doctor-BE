@@ -20,8 +20,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/schedules")
-@CrossOrigin(origins = "*")
-
+@CrossOrigin(
+        origins = {"http://localhost:3000", "http://127.0.0.1:3000"},
+        allowCredentials = "true",
+        allowedHeaders = "*"
+)
 public class scheduleController {
     @Autowired
     private scheduleApplication scheduleApplication;
@@ -45,6 +48,7 @@ public class scheduleController {
             ObjectId userId = (ObjectId) session.getAttribute("userId");
             if (userId != null) {
                 schedule.setDoctorId(userId);
+                schedule.setTime(schedule.getTime());
 //                schedule.setDeparmentId(doctorService.getDepartmentByDoctorId(String.valueOf(userId)));
                 schedule.setAvailableFlag(true);
                 scheduleApplication.createSchedule(schedule);
