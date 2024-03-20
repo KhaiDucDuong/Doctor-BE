@@ -65,6 +65,9 @@ public class DoctorController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Doctor> SearchDoctorsReg(@Valid @PathVariable("data") String data){
         data = data.replace("+", " ");
+        if (data.equals("all")) {
+            return  doctorService.findAllDoctor();
+        }
         return doctorService.searchDoctors(data);
     }
 }
