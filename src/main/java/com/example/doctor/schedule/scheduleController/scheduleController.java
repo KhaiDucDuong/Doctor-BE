@@ -31,9 +31,11 @@ public class scheduleController {
     private DoctorService doctorService;
     @Autowired
     private scheduleService scheduleService;
+
     public scheduleController(scheduleApplication scheduleApplication) {
         this.scheduleApplication = scheduleApplication;
     }
+
     @SneakyThrows
     @PostMapping("/createSchedule")
     @ResponseStatus(HttpStatus.CREATED)
@@ -50,9 +52,15 @@ public class scheduleController {
         }
         return schedule;
     }
-    @GetMapping("/schedule/{data}")
+
+    @GetMapping("/schedule")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<Schedule> getDoctorScheduleByWeek(@Valid @PathVariable("data") String data){
-        return  scheduleService.getScheduleByDoctorId(data);
+    public List<Schedule> getDoctorScheduleByWeek() {
+        HttpSession session = request.getSession(false);
+        ObjectId userId = null;
+        if (session != null) {
+            userId = (ObjectId) session.getAttribute("userId");
+        }
+        return scheduleService.getScheduleByDoctorId(String.valueOf(userId));
     }
 }
