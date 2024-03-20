@@ -1,10 +1,8 @@
 package com.example.doctor.doctor.doctorController;
 
-import com.example.doctor.department.Department;
 import com.example.doctor.doctor.Doctor;
 import com.example.doctor.doctor.doctorApplication.DoctorsApplication;
 import com.example.doctor.doctor.doctorService.DoctorService;
-import com.example.doctor.patient.Patient;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +16,7 @@ import java.util.List;
 public class DoctorController {
     @Autowired
     private DoctorService doctorService;
-    private DoctorsApplication doctorApplication;
+    private final DoctorsApplication doctorApplication;
     public DoctorController(DoctorsApplication doctorApplication) {
         this.doctorApplication = doctorApplication;
     }
@@ -43,7 +41,7 @@ public class DoctorController {
             throw new RuntimeException(e);
         }
     }
-    @PutMapping("/deleteDepartment")
+    @PutMapping("/deleteDoctor")
     public Doctor deleteDoctor(@RequestBody Doctor doctor) {
         try {
             doctor.setAvailableFlag(false);
@@ -53,6 +51,7 @@ public class DoctorController {
             throw new RuntimeException(e);
         }
     }
+
     @GetMapping("/allDoctors")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Doctor> getDoctors(){

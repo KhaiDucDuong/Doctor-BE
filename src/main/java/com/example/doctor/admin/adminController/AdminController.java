@@ -55,5 +55,26 @@ public class AdminController {
             throw new RuntimeException(e);
         }
     }
-
+    @PutMapping("/enableDoctor")
+    public Doctor enableDoctor(@RequestBody Doctor doctor){
+        try{
+            doctor.setAvailableFlag(true);
+            return doctorService.updateDoctor(doctor);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+    @PutMapping("/disableDoctor")
+    public Doctor disableDoctor(@RequestBody Doctor doctor){
+        try{
+            doctor.setAvailableFlag(false);
+            return doctorService.updateDoctor(doctor);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
 }
