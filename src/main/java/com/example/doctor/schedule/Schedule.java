@@ -24,5 +24,8 @@ public class Schedule implements Serializable {
     private ObjectId deparmentId;
     private String dateOfweek;
     private String time;
+    // Doctor muốn khám thì đặt ca 
     private Boolean availableFlag;
+    //Cờ này dùng để xác định ca đã có cuộn hẹn chưa dành cho patient
+    private Boolean appointmentFlag;
 }
