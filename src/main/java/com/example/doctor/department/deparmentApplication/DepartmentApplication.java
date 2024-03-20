@@ -15,10 +15,20 @@ public class DepartmentApplication {
         if (StringUtils.isEmpty(departmentName.getDepartmentName())) {
             throw new Exception("Department name can not be not empty");
         }
-        else if (departmentService.getdepartmentByDepartmentName(departmentName.getDepartmentName())==null)
+        else if (departmentService.getdepartmentByDepartmentName(departmentName.getDepartmentName()).size()>0)
         {
             throw new Exception("Department name has been created");
         }
         return departmentService.addDepartment(departmentName);
+    }
+    public Department updateDepartment(Department department) throws Exception{
+        if (StringUtils.isEmpty(department.getDepartmentName())) {
+            throw new Exception("Department name can not be not empty");
+        }
+        else if (departmentService.getdepartmentByDepartmentName(department.getDepartmentName()).size()>0)
+        {
+            throw new Exception("Department name has been updated");
+        }
+        return departmentService.updateDepartment(department);
     }
 }

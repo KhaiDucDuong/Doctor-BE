@@ -14,15 +14,16 @@ public class DoctorService {
     public DoctorService(IdoctorRepository repository) {
         this.repository = repository;
     }
-
-
     public Doctor addDoctor(Doctor doctor){
         return repository.save(doctor);
-
     }
-
-    public List<Doctor> findAllDocter(){
-        return repository.findAll();
+    public Doctor updateDoctor(Doctor doctor){
+        if(repository.existsById(String.valueOf(doctor.get_id()))){
+            return repository.save(doctor);
+        }
+        else{
+            throw new RuntimeException("Doctor with ID " + doctor.get_id() + " does not exist.");
+        }
     }
 
     public List<Doctor> findAllDoctor(){
@@ -31,7 +32,6 @@ public class DoctorService {
 
     public Doctor getDoctorByDoctorId(String doctorId){
         return repository.findById(doctorId).get();
-
     }
     public ObjectId getDepartmentByDoctorId(String doctorId){
         return repository.findById(doctorId).get().getDeparmentId();
@@ -39,7 +39,6 @@ public class DoctorService {
     public List<Doctor> getdoctorByDoctorName(String Fullname){
         return repository.findByFullname(Fullname);
     }
-
     public String deleteUser(String userId){
         repository.deleteById(userId);
         return userId+" User is deleted";

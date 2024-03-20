@@ -3,6 +3,7 @@ package com.example.doctor.patient.patientController;
 import com.example.doctor.doctor.Doctor;
 import com.example.doctor.doctor.doctorService.DoctorService;
 import com.example.doctor.patient.Patient;
+import com.example.doctor.patient.patientApplication.PatientApplication;
 import com.example.doctor.patient.patientService.PatientService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,11 +24,39 @@ import java.util.List;
 )
 public class PatientController {
     @Autowired
-    private PatientService departmentServiceTypeService;
+    private PatientService patientService;
+    private PatientApplication patientApplication;
     @Autowired
     private HttpServletRequest request;
     public PatientController(PatientService productTypeApplication) {
-        this.departmentServiceTypeService = productTypeApplication;
+        this.patientService = productTypeApplication;
+    }
+    @PostMapping("/createPatient")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Patient createPatient(@RequestBody Patient patient){
+        try {
+            patient.setIsDeleted(false);
+            return patientApplication.createPatient(patient);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @PutMapping("/updatePatient")
+    public Patient updatePatient(@RequestBody Patient patient) throws Exception {
+        try {
+            return patientApplication.updatePatient(patient);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @PutMapping("/deletePatient")
+    public Patient deletePatient(@RequestBody Patient patient) {
+        try {
+            patient.setIsDeleted(true);
+            return patientService.updatePatient(patient);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     @GetMapping("/info")
     public Patient getUserInfo() {
@@ -37,7 +66,7 @@ public class PatientController {
             ObjectId userId = (ObjectId) session.getAttribute("userId");
             if (userId != null) {
                 // Sử dụng userId để lấy thông tin người dùng từ cơ sở dữ liệu
-                Patient userInfo = departmentServiceTypeService.getPatientByPatientId(String.valueOf(userId));
+                Patient userInfo = patientService.getPatientByPatientId(String.valueOf(userId));
                 if (userInfo != null) {
                     return userInfo;
                 }
@@ -49,7 +78,7 @@ public class PatientController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Patient> allPatients() {
         try {
-            return  departmentServiceTypeService.findAllPatient();
+            return  patientService.findAllPatient();
     } catch (Exception e) {
         throw new RuntimeException(e);
     }
@@ -59,6 +88,6 @@ public class PatientController {
     @GetMapping("/patient_{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Patient  getPatient(@Valid @PathVariable("id") String id){
-        return departmentServiceTypeService.getPatientByPatientId(id);
+        return patientService.getPatientByPatientId(id);
     }
 }

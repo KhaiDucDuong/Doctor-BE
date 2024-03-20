@@ -23,4 +23,5 @@ public class Department implements Serializable {
     private String openTime;
     private String closeTime;
     private Boolean availableFlag;
+    private Boolean isDeleted;
 }

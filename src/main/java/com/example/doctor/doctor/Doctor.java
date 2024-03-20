@@ -28,4 +28,5 @@ public class Doctor implements Serializable {
     private String specialize;
     private String description;
     private Boolean availableFlag;
+    private Boolean isDeleted;
 }
