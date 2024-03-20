@@ -21,8 +21,6 @@ public class Doctor implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId _id;
     @JsonSerialize(using = ToStringSerializer.class)
-    private ObjectId accountId;
-    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId departmentId;
     private String fullname;
     private Boolean gender;

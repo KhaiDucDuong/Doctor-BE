@@ -20,7 +20,9 @@ import java.sql.Date;
 public class Schedule implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId _id;
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId doctorId;
+    @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId deparmentId;
     private String dateOfweek;
     private String time;

@@ -40,7 +40,7 @@ public class scheduleController {
             ObjectId userId = (ObjectId) session.getAttribute("userId");
             if (userId != null) {
                 schedule.setDoctorId(userId);
-                schedule.setDeparmentId(doctorService.getDepartmentByDoctorId(String.valueOf(userId)));
+//                schedule.setDeparmentId(doctorService.getDepartmentByDoctorId(String.valueOf(userId)));
                 schedule.setAvailableFlag(true);
                 scheduleApplication.createSchedule(schedule);
             }
