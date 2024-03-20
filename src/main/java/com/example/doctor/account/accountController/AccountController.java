@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,11 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/authentications")
+@CrossOrigin(
+        origins = {"http://localhost:3000", "http://127.0.0.1:3000/"},
+        allowCredentials = "true",
+        allowedHeaders = "*"
+)
 public class AccountController {
     @Autowired
     public AccountApplication accountApplication;
@@ -79,9 +85,14 @@ public class AccountController {
                     userId = accountService.findUserId(userName);
                 }
             }
+            else
+            {
+                return new ResponseEntity<>(
+                    "Authentication failed",
+                    HttpStatus.BAD_REQUEST);
+            }
             session = request.getSession();
             session.setAttribute("userId", userId);
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
