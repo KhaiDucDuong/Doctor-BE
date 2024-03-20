@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface  IdoctorRepository extends MongoRepository<Doctor,String>, CustomIdoctorRepository {
     List<Doctor> findByFullname(String doctor);
-    List<Doctor> findByFullNameIgnoreCase(String fullname);
+    List<Doctor> findByFullnameIgnoreCase(String fullname);
     @Query("{ 'fullname' : { '$regex' : ?0 , $options: 'i'}}")
     List<Doctor> SearchDoctorsReg(String fullname);
 
