@@ -38,12 +38,12 @@ public class scheduleService {
         return repository.getSchedulesByDoctorId(doctorId);
     }
 
-    public String findStartTime(String dateOfweek) {
-        Schedule schedule = repository.findSchedulesByDateOfweek(dateOfweek);
+    public Boolean findTime(String dateOfweek, String time) {
+        Schedule schedule = repository.findSchedulesByDateOfweekAndTime(dateOfweek, time);
         if (schedule != null) {
-            return schedule.getTime();
+            return true;
         } else {
-            return null;
+            return false;
         }
     }
 }

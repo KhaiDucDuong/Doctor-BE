@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface IscheduleRepository extends MongoRepository<Schedule,String> {
     Schedule findSchedulesByDateOfweek(String dateOfweek);
+    Schedule findSchedulesByDateOfweekAndTime(String dateOfweek, String time);
     List<Schedule> getSchedulesByDoctorId(ObjectId doctorId);
 }

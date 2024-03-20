@@ -25,11 +25,8 @@ public class scheduleApplication {
             throw new Exception("Date can not be empty");
         } else if (StringUtils.isEmpty(schedule.getTime())) {
             throw new Exception("End time can not be empty");
-        } else if (scheduleService.findDayofWeek(schedule.getDateOfweek()) != null) {
-            if (scheduleService.findStartTime(schedule.getDateOfweek()) != null)
-            {
+        } else if (scheduleService.findTime(schedule.getDateOfweek(), schedule.getTime())) {
                 throw new Exception("Account name has been created");
-            }
         }
         return scheduleService.addSchedule(schedule);
     }
