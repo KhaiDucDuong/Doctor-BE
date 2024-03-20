@@ -14,4 +14,5 @@ public interface IdeparmentRepository extends MongoRepository<Department,String>
 
     @Query("{ 'departmentName' : { '$regex' : ?0 , $options: 'i'}}")
     List<Department> SearchDepartment(String departmentName);
+
 }

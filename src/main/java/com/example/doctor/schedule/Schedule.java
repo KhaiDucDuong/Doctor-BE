@@ -23,7 +23,6 @@ public class Schedule implements Serializable {
     private ObjectId doctorId;
     private ObjectId deparmentId;
     private String dateOfweek;
-    private String startTime;
-    private String endTime;
+    private String time;
     private Boolean availableFlag;
 }

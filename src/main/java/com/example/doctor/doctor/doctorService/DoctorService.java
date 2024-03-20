@@ -1,13 +1,11 @@
 package com.example.doctor.doctor.doctorService;
 
-import com.example.doctor.department.Department;
-import com.example.doctor.department.deparmentRepository.IdeparmentRepository;
 import com.example.doctor.doctor.Doctor;
 import com.example.doctor.doctor.doctorRepository.IdoctorRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.print.Doc;
 import java.util.List;
 @Component
 public class DoctorService {
@@ -34,6 +32,9 @@ public class DoctorService {
     public Doctor getDoctorByDoctorId(String doctorId){
         return repository.findById(doctorId).get();
 
+    }
+    public ObjectId getDepartmentByDoctorId(String doctorId){
+        return repository.findById(doctorId).get().getDeparmentId();
     }
     public List<Doctor> getdoctorByDoctorName(String Fullname){
         return repository.findByFullname(Fullname);

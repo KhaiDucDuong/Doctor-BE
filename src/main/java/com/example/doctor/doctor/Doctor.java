@@ -20,7 +20,6 @@ import java.util.Date;
 public class Doctor implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId _id;
-    private ObjectId accountId;
     private ObjectId deparmentId;
     private String fullname;
     private Boolean gender;
