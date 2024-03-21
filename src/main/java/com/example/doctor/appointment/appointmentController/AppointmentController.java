@@ -2,6 +2,8 @@ package com.example.doctor.appointment.appointmentController;
 
 import com.example.doctor.appointment.Appointment;
 import com.example.doctor.appointment.appointmentApplication.AppointmentApplication;
+import com.example.doctor.appointment.appointmentService.AppointmentService;
+import com.example.doctor.schedule.Schedule;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.SneakyThrows;
@@ -12,12 +14,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @RestController
+@CrossOrigin(
+        origins = {"http://localhost:3000", "http://127.0.0.1:3000"},
+        allowCredentials = "true"
+)
 @RequestMapping("/appointment")
 public class AppointmentController {
     @Autowired
     private AppointmentApplication appointmentApplication;
+    @Autowired
+    private AppointmentService appointmentService;
     @Autowired
     private HttpServletRequest request;
     @SneakyThrows
@@ -37,4 +46,15 @@ public class AppointmentController {
         }
         return appointment;
     }
+    @GetMapping("/appointmentOrdered")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<Appointment> getAppointmentByPatientId() {
+        HttpSession session = request.getSession(false);
+        ObjectId userId = null;
+        if (session != null) {
+            userId = (ObjectId) session.getAttribute("userId");
+        }
+        return appointmentService.getAppointmentByPatientId(userId);
+    }
+
 }
