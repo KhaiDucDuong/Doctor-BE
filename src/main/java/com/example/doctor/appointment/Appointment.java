@@ -21,7 +21,7 @@ public class Appointment implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId _id;
     private ObjectId patientId;
-    private Date date;
+    private Date appointmentDate;
     private ObjectId scheduleId;
     private String symptomDescription;
     private Integer status;

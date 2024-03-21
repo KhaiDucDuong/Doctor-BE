@@ -39,7 +39,7 @@ public class AppointmentController {
             if (userId != null) {
                 appointment.setPatientId(userId);
                 appointment.setScheduleId(data);
-                appointment.setDate( appointment.getDate() );
+                appointment.setAppointmentDate( appointment.getAppointmentDate() );
                 appointment.setSymptomDescription(appointment.getSymptomDescription());
                 appointment.setStatus(1);
                 appointmentApplication.createAppointmentByBooking(appointment);
