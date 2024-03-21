@@ -32,14 +32,14 @@ public class AppointmentController {
     @SneakyThrows
     @PostMapping("/booking/{data}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Appointment CreateAppointment(@PathVariable("data") ObjectId data, String date, @RequestBody Appointment appointment) {
+    public Appointment CreateAppointment(@PathVariable("data") ObjectId data, @RequestBody Appointment appointment) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             ObjectId userId = (ObjectId) session.getAttribute("userId");
             if (userId != null) {
                 appointment.setPatientId(userId);
                 appointment.setScheduleId(data);
-                appointment.setDate(new Date(date));
+                appointment.setDate( appointment.getDate() );
                 appointment.setSymptomDescription(appointment.getSymptomDescription());
                 appointment.setStatus(1);
                 appointmentApplication.createAppointmentByBooking(appointment);

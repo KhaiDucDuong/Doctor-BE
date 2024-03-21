@@ -23,6 +23,6 @@ public class Appointment implements Serializable {
     private ObjectId patientId;
     private Date date;
     private ObjectId scheduleId;
-    private String SymptomDescription;
+    private String symptomDescription;
     private Integer status;
 }
