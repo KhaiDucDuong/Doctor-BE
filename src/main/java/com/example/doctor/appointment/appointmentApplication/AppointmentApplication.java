@@ -16,7 +16,7 @@ public class AppointmentApplication {
     private HttpServletRequest request;
     public Appointment createAppointmentByBooking(Appointment appointment) throws Exception {
         //validate data
-        if (StringUtils.isNotEmpty(appointment.getScheduleId().toString())) {
+        if (StringUtils.isEmpty(appointment.getScheduleId().toString())) {
             throw new Exception("You have appointment in this time");
         }
         return appointmentService.addAppointment(appointment);
