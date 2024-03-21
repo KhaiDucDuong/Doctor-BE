@@ -41,6 +41,7 @@ public class AppointmentController {
                 appointment.setScheduleId(data);
                 appointment.setDate(new Date(date));
                 appointment.setSymptomDescription(appointment.getSymptomDescription());
+                appointment.setStatus(1);
                 appointmentApplication.createAppointmentByBooking(appointment);
             }
         }

@@ -69,7 +69,7 @@ public class AccountController {
     @PostMapping("/signIn")
     public ResponseEntity<?> SignInUser(@Valid @RequestBody commandRegister commandRegister) {
         ObjectId userId = null;
-        String role;
+        String role = null;
         HttpSession session;
         try {
             String userName = commandRegister.getLoginName();
@@ -77,10 +77,13 @@ public class AccountController {
             if (accountApplication.authentication(userName, passWord)) {
                 if (Objects.equals(accountService.findRolesByLoginName(userName), "patient")) {
                     userId = accountService.findUserId(userName);
+                    role = accountService.findRolesByLoginName(userName);
                 } else if (Objects.equals(accountService.findRolesByLoginName(userName), "doctor")) {
                     userId = accountService.findUserId(userName);
+                    role = accountService.findRolesByLoginName(userName);
                 } else if (Objects.equals(accountService.findRolesByLoginName(userName), "admin")) {
                     userId = accountService.findUserId(userName);
+                    role = accountService.findRolesByLoginName(userName);
                 }
             }
             else
@@ -91,6 +94,7 @@ public class AccountController {
             }
             session = request.getSession();
             session.setAttribute("userId", userId);
+            session.setAttribute("role", role);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
