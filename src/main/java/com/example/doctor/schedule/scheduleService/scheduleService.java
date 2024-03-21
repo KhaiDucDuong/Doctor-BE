@@ -1,7 +1,5 @@
 package com.example.doctor.schedule.scheduleService;
 
-import com.example.doctor.account.Account;
-import com.example.doctor.doctor.Doctor;
 import com.example.doctor.schedule.Schedule;
 import com.example.doctor.schedule.scheduleRepository.IscheduleRepository;
 
@@ -33,6 +31,13 @@ public class scheduleService {
             return null;
         }
     }
+
+    public void setAppointmentFlagByScheduleId(ObjectId scheduleId){
+        Schedule schedule = repository.findSchedulesBy_id(scheduleId);
+        schedule.setAppointmentFlag(true);
+        repository.save(schedule);
+    }
+
     public List<Schedule> getScheduleByDoctorId(String id){
         ObjectId doctorId = new ObjectId(id);
         return repository.getSchedulesByDoctorId(doctorId);
