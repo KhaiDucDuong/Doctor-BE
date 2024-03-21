@@ -3,6 +3,7 @@ package com.example.doctor.doctor.doctorController;
 import com.example.doctor.doctor.Doctor;
 import com.example.doctor.doctor.doctorApplication.DoctorsApplication;
 import com.example.doctor.doctor.doctorService.DoctorService;
+import com.example.doctor.patient.Patient;
 import jakarta.validation.Valid;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,11 @@ public class DoctorController {
             throw new RuntimeException(e);
         }
     }
-
+    @GetMapping("/doctor_{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Doctor getDoctor(@Valid @PathVariable("id") String id){
+        return doctorService.getDoctorByDoctorId(id);
+    }
     @GetMapping("/allDoctors")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Doctor> getDoctors(){

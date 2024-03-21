@@ -2,6 +2,7 @@ package com.example.doctor.doctor.doctorService;
 
 import com.example.doctor.doctor.Doctor;
 import com.example.doctor.doctor.doctorRepository.IdoctorRepository;
+import com.example.doctor.patient.Patient;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
