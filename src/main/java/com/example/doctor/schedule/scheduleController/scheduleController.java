@@ -51,6 +51,7 @@ public class scheduleController {
                 schedule.setTime(schedule.getTime());
 //                schedule.setDeparmentId(doctorService.getDepartmentByDoctorId(String.valueOf(userId)));
                 schedule.setAvailableFlag(true);
+                schedule.setAppointmentFlag(false);
                 scheduleApplication.createSchedule(schedule);
             }
         }
@@ -67,4 +68,12 @@ public class scheduleController {
         }
         return scheduleService.getScheduleByDoctorId(String.valueOf(userId));
     }
+
+    @GetMapping("/listSchedule/{data}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<Schedule> getDoctor(@Valid @PathVariable("data") String data) {
+        return scheduleService.getScheduleByDoctorId(String.valueOf(data));
+    }
+
+
 }

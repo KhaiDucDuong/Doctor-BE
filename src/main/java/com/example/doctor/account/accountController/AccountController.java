@@ -69,6 +69,7 @@ public class AccountController {
     @PostMapping("/signIn")
     public ResponseEntity<?> SignInUser(@Valid @RequestBody commandRegister commandRegister) {
         ObjectId userId = null;
+        String role;
         HttpSession session;
         try {
             String userName = commandRegister.getLoginName();

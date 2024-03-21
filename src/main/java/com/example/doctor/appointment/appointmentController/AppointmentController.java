@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @RestController
@@ -20,7 +21,7 @@ public class AppointmentController {
     @Autowired
     private HttpServletRequest request;
     @SneakyThrows
-    @GetMapping("/booking/{data}")
+    @PostMapping("/booking/{data}")
     @ResponseStatus(HttpStatus.CREATED)
     public Appointment CreateAppointment(@PathVariable("data") ObjectId data, @RequestBody Appointment appointment) {
         HttpSession session = request.getSession(false);
@@ -29,10 +30,12 @@ public class AppointmentController {
             if (userId != null) {
                 appointment.setPatientId(userId);
                 appointment.setScheduleId(data);
-                appointment.setDate(appointment.getDate());
+                Long current = System.currentTimeMillis();
+                appointment.setDate(new Date(current));
                 appointmentApplication.createAppointmentByBooking(appointment);
             }
         }
         return appointment;
     }
+
 }
